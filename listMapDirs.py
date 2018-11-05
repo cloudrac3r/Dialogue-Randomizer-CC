@@ -36,7 +36,7 @@ def recursive_items(dictionary):
 
 def main():
 	
-	dirName = 'input\\maps\\';
+	dirName = 'input/maps/';
 	
 	# Get the list of all files in directory tree at given path
 	listOfFiles = getListOfFiles(dirName)
@@ -51,7 +51,7 @@ def main():
 	print()
 	print(
 		"The",
-		dirName.split("\\")[-2],
+		dirName.split("/")[-2],
 		"folder contains",
 		listOfFiles.__len__(),
 		"files",

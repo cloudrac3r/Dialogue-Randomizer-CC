@@ -43,7 +43,7 @@ def recursive_items(dictionary, current_path):
 
 def main():
 	
-	dirName = 'input\\maps\\';
+	dirName = 'input/maps/';
 	
 	# Get the list of all files in directory tree at given path
 	listOfFiles = getListOfFiles(dirName)
