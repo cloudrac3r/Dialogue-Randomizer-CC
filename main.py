@@ -121,7 +121,7 @@ def main():
 					" = value[0][i]",
 					globals(), {"data": data, "value": value, "i": i}
 				)
-
+	del dialogueData
 
 	ChangeTitle("Maps saved - {} of {}".format(0, len(outputPaths)))
 
@@ -136,7 +136,8 @@ def main():
 			try:
 				with open(outputPaths[i], 'w') as outfile:
 					exec(
-						"json.dump(data['"+dataPaths[i]+"'], outfile, sort_keys=True, indent=4)",
+						"json.dump(data['"+dataPaths[i]+"'], outfile, sort_keys=True, indent=4); " +
+						"del data['"+dataPaths[i]+"']",
 						globals(),
 						{"data": data, "json":json, "outfile": outfile}
 					)
