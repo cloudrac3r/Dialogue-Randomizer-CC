@@ -4,25 +4,31 @@ import json
 import random
 import pathlib
 
+def setTitle(string):
+	if os.sys.platform == "windows":
+		ctypes.windll.kernel32.SetConsoleTitleW(string)
+	else:
+		print(string)
+
 '''
-	For the given path, get the List of all files in the directory tree 
+	For the given path, get the List of all files in the directory tree
 '''
 def getListOfFiles(dirName):
-	# create a list of file and sub directories 
-	# names in the given directory 
+	# create a list of file and sub directories
+	# names in the given directory
 	listOfFile = os.listdir(dirName)
 	allFiles = list()
 	# Iterate over all the entries
 	for entry in listOfFile:
 		# Create full path
 		fullPath = os.path.join(dirName, entry)
-		# If entry is a directory then get the list of files in this directory 
+		# If entry is a directory then get the list of files in this directory
 		if os.path.isdir(fullPath):
 			allFiles = allFiles + getListOfFiles(fullPath)
 		else:
 			allFiles.append(fullPath)
-				
-	return allFiles        
+
+	return allFiles
 
 def recursive_items(dictionary, current_path):
 	if type(dictionary) is dict:
@@ -43,9 +49,9 @@ def recursive_items(dictionary, current_path):
 
 
 
-	
-dirName = 'input\\maps\\'
-	
+
+dirName = 'input/maps/'
+
 # Get the list of all files in directory tree at given path
 listOfFiles = getListOfFiles(dirName)
 
@@ -125,7 +131,7 @@ for i in range(len(listOfFiles)):
 		exec("global data, json, file; data['"+filePath+"'] = json.load(file)", globals(), {"data": data, "json":json, "file": file})
 		print("Loaded "+ filePath.split("/")[-1]+"\n")
 print("Has loaded all maps!\n")
-		
+
 for key, value in dialogueData.items():
 	if key == "faces":
 		for key2, value2 in value[0].items():
@@ -145,7 +151,7 @@ for key, value in dialogueData.items():
 
 c = 0
 
-ctypes.windll.kernel32.SetConsoleTitleW("Maps saved - {} of {}".format(0, len(outputPath)))
+setTitle("Maps saved - {} of {}".format(0, len(outputPath)))
 for i in range(len(outputPath)):
 	print("Saving "+dataPath[i].split("/")[-1]+"...")
 	c = 0
@@ -168,7 +174,8 @@ for i in range(len(outputPath)):
 			except:
 				None
 	print("Saved "+dataPath[i].split("/")[-1]+"\n")
-	ctypes.windll.kernel32.SetConsoleTitleW("Maps saved - {} of {}".format(i+1, len(outputPath)))
+	setTitle("Maps saved - {} of {}".format(i+1, len(outputPath)))
+
 with open("output/RandomizedDialogue/package.json", "w") as outfile:
 	json.dump({"name": "Randomized dialogue"}, outfile, sort_keys=True, indent=4)
 

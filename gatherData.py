@@ -3,48 +3,54 @@ import os
 import json
 import pathlib
 
+def setTitle(string):
+	if os.sys.platform == "windows":
+		ctypes.windll.kernel32.SetConsoleTitleW(string)
+	else:
+		print(string)
+
 '''
-	For the given path, get the List of all files in the directory tree 
+	For the given path, get the List of all files in the directory tree
 '''
 def getListOfFiles(dirName):
-	# create a list of file and sub directories 
-	# names in the given directory 
+	# create a list of file and sub directories
+	# names in the given directory
 	listOfFile = os.listdir(dirName)
 	allFiles = list()
 	# Iterate over all the entries
 	for entry in listOfFile:
 		# Create full path
 		fullPath = os.path.join(dirName, entry)
-		# If entry is a directory then get the list of files in this directory 
+		# If entry is a directory then get the list of files in this directory
 		if os.path.isdir(fullPath):
 			allFiles = allFiles + getListOfFiles(fullPath)
 		else:
 			allFiles.append(fullPath)
-				
-	return allFiles        
+
+	return allFiles
 
 def recursive_items(dictionary, current_path):
-    if type(dictionary) is dict:
-        for key, value in dictionary.items():
-            if type(value) is dict or type(value) is list:
-                yield (current_path + "[" + repr(key) + "]", value, key)
-                yield from recursive_items(value, current_path + "[" + repr(key) + "]")
-            else:
-                yield (current_path + "[" + repr(key) + "]", value, key)
-    elif type(dictionary) is list:
-        for index, value in enumerate(dictionary):
-            if type(value) is dict or type(value) is list:
-                yield (current_path + "[" + repr(index) + "]", value, index)
-                yield from recursive_items(value, current_path + "[" + repr(index) + "]")
-            else:
-                yield (current_path + "[" + repr(index) + "]", value, index)
+	if type(dictionary) is dict:
+		for key, value in dictionary.items():
+			if type(value) is dict or type(value) is list:
+				yield (current_path + "[" + repr(key) + "]", value, key)
+				yield from recursive_items(value, current_path + "[" + repr(key) + "]")
+			else:
+				yield (current_path + "[" + repr(key) + "]", value, key)
+	elif type(dictionary) is list:
+		for index, value in enumerate(dictionary):
+			if type(value) is dict or type(value) is list:
+				yield (current_path + "[" + repr(index) + "]", value, index)
+				yield from recursive_items(value, current_path + "[" + repr(index) + "]")
+			else:
+				yield (current_path + "[" + repr(index) + "]", value, index)
 
 
 
 def main():
-	
-	dirName = 'input\\maps\\';
-	
+
+	dirName = 'input/maps/'
+
 	# Get the list of all files in directory tree at given path
 	listOfFiles = getListOfFiles(dirName)
 
@@ -85,7 +91,7 @@ def main():
 		for i in range(times):
 			currentMap += 1
 			progress = ((currentMap - 1) / totalMaps) * 100
-			ctypes.windll.kernel32.SetConsoleTitleW("Map {0} of {1} - {2}%".format(currentMap, totalMaps, progress))
+			setTitle("Map {0} of {1} - {2}%".format(currentMap, totalMaps, progress))
 			for path, value, key in recursive_items(data[i], dataPath[i]):
 				if key == "message":
 					messages += 1
@@ -122,7 +128,7 @@ def main():
 						dialogueData["faces"][0][person].append(value); dialogueData["faces"][1][person].append(path)
 						print(dialogueData["faces"][1][person][-1] + "\n")
 		data = []
-		dataPath = []			
+		dataPath = []
 
 		print("Data extracted!\n")
 
@@ -138,7 +144,7 @@ def main():
 
 	while True:
 		None
-		
-		
+
+
 if __name__ == '__main__':
 	main()
