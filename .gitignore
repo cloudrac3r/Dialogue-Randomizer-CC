@@ -1,4 +1,5 @@
-data
-input
-maps
-output
+/data
+/input
+/maps
+/output
+/.vscode
