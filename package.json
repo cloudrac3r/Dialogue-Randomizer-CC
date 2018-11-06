@@ -1,0 +1,23 @@
+{
+  "name": "Dialogue-Randomizer-CC",
+  "version": "1.0.0",
+  "description": "1. Put 'maps' folder into 'input' from 'CrossCode/assets/data' 2. Start gather data script (This step is only needed each time crosscode updates) 3. Use main to randomize dialogue",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThePIE12/Dialogue-Randomizer-CC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThePIE12/Dialogue-Randomizer-CC/issues"
+  },
+  "homepage": "https://github.com/ThePIE12/Dialogue-Randomizer-CC#readme",
+  "dependencies": {
+    "random-seed": "^0.3.0"
+  }
+}
