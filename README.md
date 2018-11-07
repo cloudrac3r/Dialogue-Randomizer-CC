@@ -14,12 +14,11 @@ Forked from https://github.com/ThePIE12/Dialogue-Randomizer-CC to create a node.
 
 ## Notes
 
-- I have no idea if this works
+- Faces are not randomised.
 - Seeds will not produce the same results across the JS and Python versions.
 
-## TODO:
+## TODO
 
 - Understand the code
 - Clean up this mess
-- Something with faces?
 - CCLoader version
